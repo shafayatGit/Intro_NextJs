@@ -19,6 +19,7 @@ import {
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
+import { ModeToggle } from "./Layout/MoodToggle";
 
 interface NavbarProps {
   className?: string;
@@ -33,14 +34,12 @@ const Navbar = ({ className }: NavbarProps) => {
             href="https://www.shadcnblocks.com"
             className="flex items-center gap-2"
           >
-            <Image
-              height={32}
-              width={32}
+            <img
               src="https://deifkwefumgah.cloudfront.net/shadcnblocks/block/logos/shadcnblockscom-icon.svg"
               alt="Shadcn UI Navbar"
             />
             <span className="text-lg font-semibold tracking-tighter">
-              Shadcnblocks.com
+              Next Blog
             </span>
           </a>
           <NavigationMenu className="hidden lg:block">
@@ -72,6 +71,7 @@ const Navbar = ({ className }: NavbarProps) => {
             </NavigationMenuList>
           </NavigationMenu>
           <div className="hidden items-center gap-4 lg:flex">
+            <ModeToggle></ModeToggle>
             <Button variant={"outline"}>
               <Link href="/login">Login</Link>
             </Button>
@@ -93,15 +93,13 @@ const Navbar = ({ className }: NavbarProps) => {
                     href="https://www.shadcnblocks.com"
                     className="flex items-center gap-2"
                   >
-                    <Image
-                      height={32}
-                      width={30}
+                    <img
                       src="https://deifkwefumgah.cloudfront.net/shadcnblocks/block/logos/shadcnblockscom-icon.svg"
                       className="max-h-8"
                       alt="Shadcn UI Navbar"
                     />
                     <span className="text-lg font-semibold tracking-tighter">
-                      Shadcnblocks.com
+                      Next Blog
                     </span>
                   </a>
                 </SheetTitle>
@@ -119,7 +117,7 @@ const Navbar = ({ className }: NavbarProps) => {
                   </Link>
                 </div>
                 <div className="mt-6 flex flex-col gap-4">
-                   <Button variant={"outline"}>
+                  <Button variant={"outline"}>
                     <Link href="/login">Login</Link>
                   </Button>
                   <Button>
