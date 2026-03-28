@@ -72,8 +72,12 @@ const Navbar = ({ className }: NavbarProps) => {
             </NavigationMenuList>
           </NavigationMenu>
           <div className="hidden items-center gap-4 lg:flex">
-            <Button variant="outline">Login</Button>
-            <Button>Sign Up</Button>
+            <Button variant={"outline"}>
+              <Link href="/login">Login</Link>
+            </Button>
+            <Button>
+              <Link href="/register">Sign Up</Link>
+            </Button>
           </div>
           <Sheet>
             <SheetTrigger
@@ -90,6 +94,8 @@ const Navbar = ({ className }: NavbarProps) => {
                     className="flex items-center gap-2"
                   >
                     <Image
+                      height={32}
+                      width={30}
                       src="https://deifkwefumgah.cloudfront.net/shadcnblocks/block/logos/shadcnblockscom-icon.svg"
                       className="max-h-8"
                       alt="Shadcn UI Navbar"
@@ -113,8 +119,12 @@ const Navbar = ({ className }: NavbarProps) => {
                   </Link>
                 </div>
                 <div className="mt-6 flex flex-col gap-4">
-                  <Button variant="outline">Login</Button>
-                  <Button>Sign Up</Button>
+                   <Button variant={"outline"}>
+                    <Link href="/login">Login</Link>
+                  </Button>
+                  <Button>
+                    <Link href="/register">Sign Up</Link>
+                  </Button>
                 </div>
               </div>
             </SheetContent>
