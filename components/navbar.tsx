@@ -17,9 +17,8 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
-import Image from "next/image";
 import Link from "next/link";
-import { ModeToggle } from "./Layout/MoodToggle";
+import { ModeToggle } from "./Layout/ModeToggle";
 
 interface NavbarProps {
   className?: string;
@@ -41,6 +40,7 @@ const Navbar = ({ className }: NavbarProps) => {
             <span className="text-lg font-semibold tracking-tighter">
               Next Blog
             </span>
+           
           </a>
           <NavigationMenu className="hidden lg:block">
             <NavigationMenuList>
@@ -68,10 +68,11 @@ const Navbar = ({ className }: NavbarProps) => {
                   About
                 </NavigationMenuLink>
               </NavigationMenuItem>
+              
             </NavigationMenuList>
           </NavigationMenu>
           <div className="hidden items-center gap-4 lg:flex">
-            <ModeToggle></ModeToggle>
+             <ModeToggle/>
             <Button variant={"outline"}>
               <Link href="/login">Login</Link>
             </Button>

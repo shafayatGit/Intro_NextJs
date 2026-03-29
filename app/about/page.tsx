@@ -1,11 +1,6 @@
-import React from 'react';
+import React from "react";
 
-const AboutPage = () => {
-    return (
-        <div>
-            <h1>This is about page</h1>
-        </div>
-    );
-};
-
-export default AboutPage;
+export default async function AboutPage() {
+  await new Promise((resolve) => setTimeout(resolve, 4000)); //that will give timeout of 4s
+  return <div>AboutPage</div>;
+}
