@@ -1,6 +1,26 @@
 "use client"; //error page must have to be clientside component
-import React from "react";
+import React, { useEffect } from "react";
 
-export default function AboutError() {
-  return <div>Something went wrong</div>;
+interface AboutErrorProps {
+  error: Error;
+  reset: () => void;
+}
+
+export default function AboutError({ error, reset }: AboutErrorProps) {
+  useEffect(() => {
+    console.error(error);
+  }, [error]);
+
+  return (
+    <div>
+      <h1>Something went wrong</h1>
+      <button
+        onClick={() => {
+          reset();
+        }}
+      >
+        Reset
+      </button>
+    </div>
+  );
 }
