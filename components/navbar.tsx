@@ -19,6 +19,8 @@ import {
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { AnimatedThemeToggler } from "@/components/ui/animated-theme-toggler"
+import { ModeToggle } from "./Layout/ModeToggle";
+import { ThemeToggle } from "./ui/uiverse";
 
 interface NavbarProps {
   className?: string;
@@ -72,7 +74,7 @@ const Navbar = ({ className }: NavbarProps) => {
             </NavigationMenuList>
           </NavigationMenu>
           <div className="hidden items-center gap-4 lg:flex">
-             <AnimatedThemeToggler/>
+             <ThemeToggle/>
             <Button variant={"outline"}>
               <Link href="/login">Login</Link>
             </Button>
