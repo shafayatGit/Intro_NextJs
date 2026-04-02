@@ -18,7 +18,7 @@ import {
 } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
-import { ModeToggle } from "./Layout/ModeToggle";
+import { AnimatedThemeToggler } from "@/components/ui/animated-theme-toggler"
 
 interface NavbarProps {
   className?: string;
@@ -72,7 +72,7 @@ const Navbar = ({ className }: NavbarProps) => {
             </NavigationMenuList>
           </NavigationMenu>
           <div className="hidden items-center gap-4 lg:flex">
-             <ModeToggle/>
+             <AnimatedThemeToggler/>
             <Button variant={"outline"}>
               <Link href="/login">Login</Link>
             </Button>
