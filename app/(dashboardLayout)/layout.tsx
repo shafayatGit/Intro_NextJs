@@ -13,12 +13,20 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar";
+import { ThemeToggle } from "@/components/ui/uiverse";
 
 export default function DashboardLayout({
-  children,
+  admin,
+  user,
 }: {
   children: React.ReactNode;
+  admin: React.ReactNode;
+  user: React.ReactNode;
 }) {
+  const userInfo = {
+    role: "admin",
+  };
+
   return (
     <SidebarProvider>
       <AppSidebar />
@@ -40,9 +48,10 @@ export default function DashboardLayout({
               </BreadcrumbItem>
             </BreadcrumbList>
           </Breadcrumb>
+          <ThemeToggle />
         </header>
         <div className="flex flex-1 flex-col gap-4 p-4">
-          <h1>{children}</h1>
+          <div>{userInfo.role === "admin" ? admin : user}</div>
         </div>
       </SidebarInset>
     </SidebarProvider>
