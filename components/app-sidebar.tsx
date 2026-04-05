@@ -19,7 +19,7 @@ import { adminRoutes } from "@/routes/adminRoutes";
 import { userRoutes } from "@/routes/userRoutes";
 import { Routes } from "@/types";
 
-// This is sample data.
+// This is sample data
 const data = {
   versions: ["1.0.1", "1.1.0-alpha", "2.0.0-beta1"],
 };
