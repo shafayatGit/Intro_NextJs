@@ -1,4 +1,5 @@
-import { Navbar } from "@/components/navbar";
+
+import { Navbar } from "@/components/Layout/navbar";
 import React from "react";
 
 export default function CommonLayout({

@@ -19,8 +19,7 @@ import {
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { AnimatedThemeToggler } from "@/components/ui/animated-theme-toggler"
-import { ModeToggle } from "./Layout/ModeToggle";
-import { ThemeToggle } from "./ui/uiverse";
+import { ThemeToggle } from "../ui/uiverse";
 
 interface NavbarProps {
   className?: string;
