@@ -1,20 +1,27 @@
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
+} from "@/components/ui/card";
 import {
   Field,
   FieldDescription,
   FieldGroup,
   FieldLabel,
-} from "@/components/ui/field"
-import { Input } from "@/components/ui/input"
+} from "@/components/ui/field";
+import { Input } from "@/components/ui/input";
+import { authClient } from "@/lib/auth-client";
 
 export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
+  const loginWithGoogle = async () => {
+    const data = await authClient.signIn.social({
+      provider: "google",
+      callbackURL:"http://localhost:3000"
+    });
+  };
   return (
     <Card {...props}>
       <CardHeader>
@@ -72,5 +79,5 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
         </form>
       </CardContent>
     </Card>
-  )
+  );
 }
