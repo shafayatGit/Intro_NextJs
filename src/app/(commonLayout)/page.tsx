@@ -1,11 +1,9 @@
 import { Button } from "@/src/components/ui/button";
-import { authClient } from "@/src/lib/auth-client";
-import { userService } from "@/src/services/user.services";
-import { cookies } from "next/headers";
+import { blogService } from "@/src/services/blog.services";
 
 export default async function Home() {
-  const { data, error } = await userService.getSession();
-  console.log(data);
+  const { data } = await blogService.getBlogPosts();
+  console.log(data.data.data.length);
   return (
     <div>
       <Button variant="destructive">Click Here</Button>
