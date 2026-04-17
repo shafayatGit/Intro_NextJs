@@ -4,7 +4,7 @@ import { BlogsType } from "@/src/types";
 
 export default async function Home() {
   const { data } = await blogService.getBlogPosts();
-  // console.log(data.data.data);
+  // console.log(data.data.data)
   return (
     <div className="grid grid-cols-3 gap-4 ">
       {data?.data?.data?.map((post: BlogsType) => (
