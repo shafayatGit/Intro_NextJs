@@ -8,7 +8,7 @@ export default async function Home() {
   return (
     <div className="grid grid-cols-3 gap-4 ">
       {data?.data?.data?.map((post: BlogsType) => (
-        <Card key={post.id} posts={post} />
+        <Card key={post.id} />
       ))}
     </div>
   );
