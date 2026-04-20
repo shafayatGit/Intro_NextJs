@@ -2,6 +2,10 @@ import { env } from "../env";
 
 const API_URL = env.APP_URL;
 
+//No dynamic and no cache no-strore : SSG-> Static Site Generation
+//{ cache: "no-store" } -> SSR -> Server Side Rendering
+//{ next: { revalidate: 60 } } -> ISR -> Incremental Static Regeneration . Mix between static and dynamic. It will cache the data for 60 seconds and after that it will revalidate the data and update the cache. So we can get the benefits of both static and dynamic rendering.
+
 export const blogService = {
   getBlogPosts: async function () {
     try {
