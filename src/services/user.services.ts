@@ -18,7 +18,7 @@ export const userService = {
       if (!session) {
         return { data: null, error: { message: "Session not found." } };
       }
-      return { data: session, error: null }; //must have to return
+      return { data: session, error: null }; //must have to return.
     } catch (error) {
       console.log(error);
       return { data: null, error: { message: "Something Went Wrong" } };
