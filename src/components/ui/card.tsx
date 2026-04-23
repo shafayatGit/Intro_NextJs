@@ -1,103 +1,39 @@
-import { cn } from "@/src/lib/utils"
-import * as React from "react"
+"use client";
+import { BlogsType } from "@/src/types";
+import { Button } from "@base-ui/react";
+import Link from "next/link";
+import React from "react";
 
-
-function Card({
-  className,
-  size = "default",
-  ...props
-}: React.ComponentProps<"div"> & { size?: "default" | "sm" }) {
+export default function BlogCard( {data} : BlogsType) {
   return (
-    <div
-      data-slot="card"
-      data-size={size}
-      className={cn(
-        "group/card flex flex-col gap-4 overflow-hidden rounded-xl bg-card py-4 text-sm text-card-foreground ring-1 ring-foreground/10 has-data-[slot=card-footer]:pb-0 has-[>img:first-child]:pt-0 data-[size=sm]:gap-3 data-[size=sm]:py-3 data-[size=sm]:has-data-[slot=card-footer]:pb-0 *:[img:first-child]:rounded-t-xl *:[img:last-child]:rounded-b-xl",
-        className
-      )}
-      {...props}
-    />
-  )
-}
-
-function CardHeader({ className, ...props }: React.ComponentProps<"div">) {
-  return (
-    <div
-      data-slot="card-header"
-      className={cn(
-        "group/card-header @container/card-header grid auto-rows-min items-start gap-1 rounded-t-xl px-4 group-data-[size=sm]/card:px-3 has-data-[slot=card-action]:grid-cols-[1fr_auto] has-data-[slot=card-description]:grid-rows-[auto_auto] [.border-b]:pb-4 group-data-[size=sm]/card:[.border-b]:pb-3",
-        className
-      )}
-      {...props}
-    />
-  )
-}
-
-function CardTitle({ className, ...props }: React.ComponentProps<"div">) {
-  return (
-    <div
-      data-slot="card-title"
-      className={cn(
-        "text-base leading-snug font-medium group-data-[size=sm]/card:text-sm",
-        className
-      )}
-      {...props}
-    />
-  )
-}
-
-function CardDescription({ className, ...props }: React.ComponentProps<"div">) {
-  return (
-    <div
-      data-slot="card-description"
-      className={cn("text-sm text-muted-foreground", className)}
-      {...props}
-    />
-  )
-}
-
-function CardAction({ className, ...props }: React.ComponentProps<"div">) {
-  return (
-    <div
-      data-slot="card-action"
-      className={cn(
-        "col-start-2 row-span-2 row-start-1 self-start justify-self-end",
-        className
-      )}
-      {...props}
-    />
-  )
-}
-
-function CardContent({ className, ...props }: React.ComponentProps<"div">) {
-  return (
-    <div
-      data-slot="card-content"
-      className={cn("px-4 group-data-[size=sm]/card:px-3", className)}
-      {...props}
-    />
-  )
-}
-
-function CardFooter({ className, ...props }: React.ComponentProps<"div">) {
-  return (
-    <div
-      data-slot="card-footer"
-      className={cn(
-        "flex items-center rounded-b-xl border-t bg-muted/50 p-4 group-data-[size=sm]/card:p-3",
-        className
-      )}
-      {...props}
-    />
-  )
-}
-
-export {
-  Card,
-  CardHeader,
-  CardFooter,
-  CardTitle,
-  CardAction,
-  CardDescription,
-  CardContent,
+    <div className="grid grid-cols-3 gap-4 justify-items-center max-w-7xl mx-auto py-10">
+      {data?.data?.data?.map((post: BlogsType) => (
+        <div
+          className="p-3 border-2 border-amber-950 rounded-2xl flex flex-col gap-3"
+          key={post.id}
+        >
+          <h1>Title: {post.title}</h1>
+          <p>Content: {post.content}</p>
+          <div className="flex gap-2">
+            Tags:
+            {post.tags.map((tag, index) => (
+              <span className="border border-e-yellow-100" key={index}>
+                {tag}
+              </span>
+            ))}
+          </div>
+          <div className="flex flex-col justify-between">
+            <div className="flex justify-between">
+              <span>Views: {post.views}</span>
+              <span>Comments: {post._count?.comment || 0}</span>
+            </div>
+            <Link href={`/blogs/${post.id}`} className="self-end mt-4">
+              {" "}
+              <Button>Read More</Button>
+            </Link>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
 }

@@ -26,7 +26,6 @@ export const blogService = {
       //   const res = await fetch(url.toString(), { next: { revalidate: 60 } }); //ISR (Incremental Static Regeneration) 60 means after 60 seconds it will revalidate the data and update the cache
 
       //------->>>>>>Best approach:
-
       const url = new URL(`${API_URL}/posts`);
       if (params) {
         Object.entries(params).forEach(([key, value]) => {
@@ -36,7 +35,6 @@ export const blogService = {
         });
       }
 
-      //
       const config: RequestInit = {}; //We will pass this config to fetch function and we will add the cache and revalidate options to this config object based on the options passed to the function
       if (options?.cache) {
         config.cache = options.cache; //We can set the cache option to "no-store" to disable caching or "force-cache" to force caching or "default" to use the default caching behavior of the browser
@@ -48,6 +46,18 @@ export const blogService = {
       const res = await fetch(url.toString(), config);
       const data = await res.json();
 
+      return { data: data, error: null };
+    } catch (error) {
+      return { data: null, error: { message: "something went wrong" } };
+    }
+  },
+
+  getBlogPostById: async function (id: string) {
+    try {
+      const res = await fetch(`${API_URL}/posts/${id}`, {
+        cache: "no-store",
+      });
+      const data = await res.json();
       return { data: data, error: null };
     } catch (error) {
       return { data: null, error: { message: "something went wrong" } };
