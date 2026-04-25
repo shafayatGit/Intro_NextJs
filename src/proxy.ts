@@ -4,6 +4,7 @@ import { Roles } from "./constants/roles";
 
 export async function proxy(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
+  
   let isAuthenticated = false;
   let isAdmin = false;
   const { data } = await userService.getSession();

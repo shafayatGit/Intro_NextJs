@@ -2,7 +2,7 @@ import { blogService } from "@/src/services/blog.services";
 import { BlogsType } from "@/src/types";
 import { Eye, MessageCircle, User } from "lucide-react";
 
-//!export const dynamicParams = false; 
+//!export const dynamicParams = false;
 // rest of the pages will shown 404 if we try to access them because we are going to generate only 3 static pages(SSG) and for the rest of the data we will use dynamic rendering(SSR). Sometimes needed.
 
 //*We have to retuen basically [ {slug: "asdfjhdjff"},{slug: "lkgkjdsfdlsjfdkf"} ] this type of array from generateStaticParams function because nextjs will use this array to generate static pages for each blog post based on the slug. So we have to fetch all the blog posts and then map through them and return the slug of each blog post in the required format.
@@ -26,22 +26,7 @@ export default async function BlogDetailsPage({
   const post = data?.data;
 
   return (
-    <article className="max-w-4xl mx-auto my-12 bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 overflow-hidden">
-      {/* Thumbnail Placeholder / Featured Image */}
-      <div className="w-full h-64 bg-slate-100 dark:bg-slate-800 flex items-center justify-center">
-        {post.thumbnail ? (
-          <img
-            src={post.thumbnail}
-            alt={post.title}
-            className="w-full h-full object-cover"
-          />
-        ) : (
-          <div className="text-slate-400 font-medium italic">
-            No header image available
-          </div>
-        )}
-      </div>
-
+    <article className="max-w-4xl mx-auto my-12 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 overflow-hidden">
       <div className="p-8">
         {/* Tags */}
         <div className="flex flex-wrap gap-2 mb-6">
