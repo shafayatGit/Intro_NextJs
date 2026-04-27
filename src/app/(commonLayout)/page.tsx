@@ -1,4 +1,4 @@
-import BlogCard from "@/src/components/ui/card";
+import BlogCard from "@/src/components/ui/blogCard";
 import { blogService } from "@/src/services/blog.services";
 import { BlogsType } from "@/src/types";
 import { Button } from "@base-ui/react";

@@ -1,5 +1,5 @@
 import { getBlogs } from "@/src/actions/blog.actions";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 export default async function AboutPage() {
   const [data, setData] = useState(null);
