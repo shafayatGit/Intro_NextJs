@@ -1,3 +1,4 @@
+"use client";
 import { getBlogs } from "@/src/actions/blog.actions";
 import { useEffect, useState } from "react";
 

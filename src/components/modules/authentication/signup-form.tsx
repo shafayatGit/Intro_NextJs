@@ -19,10 +19,12 @@ import {
 } from "../../ui/field";
 import { Input } from "../../ui/input";
 import * as z from "zod";
+import { authClient } from "@/src/lib/auth-client";
+import { toast } from "sonner";
 
 const formSchema = z.object({
   name: z.string().min(3, "Username must be at least 3 characters."),
-  email: z.email("Please enter a valid email address."),
+  email: z.string().email("Please enter a valid email address."),
   password: z
     .string()
     .min(8, "Password must be at least 8 characters.")
@@ -43,7 +45,23 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
       onSubmit: formSchema,
     },
     onSubmit: async ({ value }) => {
-      console.log("Form submitted:", value);
+      const toastId = toast.loading("Creating your account...");
+      try {
+        const { data, error } = await authClient.signUp.email(value);
+
+        if (error) {
+          toast.error(error.message || "An error occurred during signup.", {
+            id: toastId,
+          });
+          return;
+        }
+        toast.success("Account created successfully!", { id: toastId });
+      } catch (error) {
+        toast.error("An unexpected error occurred. Please try again.", {
+          id: toastId,
+        });
+        return;
+      }
     },
   });
 
