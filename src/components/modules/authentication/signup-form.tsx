@@ -21,7 +21,9 @@ import { Input } from "../../ui/input";
 import * as z from "zod";
 import { authClient } from "@/src/lib/auth-client";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
+// Form validation schema using Zod
 const formSchema = z.object({
   name: z.string().min(3, "Username must be at least 3 characters."),
   email: z.string().email("Please enter a valid email address."),
@@ -35,6 +37,7 @@ const formSchema = z.object({
 });
 
 export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
+  const router = useRouter()
   const form = useForm({
     defaultValues: {
       name: "",
@@ -56,6 +59,7 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
           return;
         }
         toast.success("Account created successfully!", { id: toastId });
+        router.push("/login");
       } catch (error) {
         toast.error("An unexpected error occurred. Please try again.", {
           id: toastId,
@@ -64,6 +68,17 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
       }
     },
   });
+
+  const handleGoogleSignIn = async () => {
+    try {
+      await authClient.signIn.social({
+        provider: "google",
+        callbackURL: "http://localhost:3000/login",
+      });
+    } catch (error) {
+      console.error("Google sign-in failed", error);
+    }
+  };
 
   return (
     <Card {...props}>
@@ -174,9 +189,12 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
         </form>
       </CardContent>
 
-      <CardFooter className="flex justify-end">
-        <Button form="signup-form" type="submit">
-          Submit
+      <CardFooter className="flex flex-col items-center gap-4">
+        <Button className="w-full" form="signup-form" type="submit">
+          Register
+        </Button>
+        <Button variant={"outline"} className="w-full" onClick={() => handleGoogleSignIn()} type="submit">
+          SignIn with Google
         </Button>
       </CardFooter>
     </Card>
