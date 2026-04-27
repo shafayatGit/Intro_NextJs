@@ -18,6 +18,19 @@ import {
   Field,
 } from "../../ui/field";
 import { Input } from "../../ui/input";
+import * as z from "zod";
+
+const formSchema = z.object({
+  name: z.string().min(3, "Username must be at least 3 characters."),
+  email: z.email("Please enter a valid email address."),
+  password: z
+    .string()
+    .min(8, "Password must be at least 8 characters.")
+    .regex(
+      /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/,
+      "Password must contain at least one uppercase letter, one number, and one special character.",
+    ),
+});
 
 export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
   const form = useForm({
@@ -25,6 +38,9 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
       name: "",
       email: "",
       password: "",
+    },
+    validators: {
+      onSubmit: formSchema,
     },
     onSubmit: async ({ value }) => {
       console.log("Form submitted:", value);
@@ -53,9 +69,13 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
             <form.Field
               name="name"
               children={(field) => {
+                const isInvalid =
+                  field.state.meta.isTouched && !field.state.meta.isValid;
                 return (
                   <Field>
-                    <FieldLabel htmlFor={field.name}>Enter Your Name</FieldLabel>
+                    <FieldLabel htmlFor={field.name}>
+                      Enter Your Name
+                    </FieldLabel>
 
                     <Input
                       id={field.name}
@@ -65,7 +85,11 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
                       onChange={(e) => field.handleChange(e.target.value)}
                       placeholder="Username"
                       autoComplete="username"
+                      aria-invalid={isInvalid}
                     />
+                    {isInvalid && (
+                      <FieldError errors={field.state.meta.errors} />
+                    )}
                   </Field>
                 );
               }}
@@ -74,9 +98,13 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
             <form.Field
               name="email"
               children={(field) => {
+                const isInvalid =
+                  field.state.meta.isTouched && !field.state.meta.isValid;
                 return (
                   <Field>
-                    <FieldLabel htmlFor={field.name}>Enter Your Email</FieldLabel>
+                    <FieldLabel htmlFor={field.name}>
+                      Enter Your Email
+                    </FieldLabel>
 
                     <Input
                       id={field.name}
@@ -86,7 +114,11 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
                       onChange={(e) => field.handleChange(e.target.value)}
                       placeholder="xyz@gmail.com"
                       autoComplete="xyz@gmail.com"
+                      aria-invalid={isInvalid}
                     />
+                    {isInvalid && (
+                      <FieldError errors={field.state.meta.errors} />
+                    )}
                   </Field>
                 );
               }}
@@ -95,9 +127,13 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
             <form.Field
               name="password"
               children={(field) => {
+                const isInvalid =
+                  field.state.meta.isTouched && !field.state.meta.isValid;
                 return (
                   <Field>
-                    <FieldLabel htmlFor={field.name}>Enter Your Password</FieldLabel>
+                    <FieldLabel htmlFor={field.name}>
+                      Enter Your Password
+                    </FieldLabel>
 
                     <Input
                       id={field.name}
@@ -107,7 +143,11 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
                       onChange={(e) => field.handleChange(e.target.value)}
                       placeholder="**********"
                       autoComplete="**********"
+                      aria-invalid={isInvalid}
                     />
+                    {isInvalid && (
+                      <FieldError errors={field.state.meta.errors} />
+                    )}
                   </Field>
                 );
               }}
