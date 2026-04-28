@@ -1,4 +1,3 @@
-
 import { AppSidebar } from "@/src/components/Layout/app-sidebar";
 import {
   Breadcrumb,
@@ -15,8 +14,9 @@ import {
   SidebarTrigger,
 } from "@/src/components/ui/sidebar";
 import { ThemeToggle } from "@/src/components/ui/uiverse";
+import { userService } from "@/src/services/user.services";
 
-export default function DashboardLayout({
+export default async function DashboardLayout({
   admin,
   user,
 }: {
@@ -24,9 +24,8 @@ export default function DashboardLayout({
   admin: React.ReactNode;
   user: React.ReactNode;
 }) {
-  const userInfo = {
-    role: "user",
-  };
+  const { data } = await userService.getSession();
+  const userInfo = data?.user;
 
   return (
     <SidebarProvider>

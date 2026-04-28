@@ -6,10 +6,10 @@ import React from "react";
 
 export default function BlogCard( {data} : BlogsType) {
   return (
-    <div className="grid grid-cols-3 gap-4 justify-items-center max-w-7xl mx-auto py-10">
+    <div className="max-w-7xl mx-auto grid grid-cols-3 gap-4 items-center justify-center">
       {data?.data?.data?.map((post: BlogsType) => (
         <div
-          className="p-3 border-2 border-amber-950 rounded-2xl flex flex-col gap-3"
+          className="p-3 border-2 border-amber-950 rounded-2xl flex flex-col gap-3 bg-gray-900/50"
           key={post.id}
         >
           <h1>Title: {post.title}</h1>
@@ -17,8 +17,8 @@ export default function BlogCard( {data} : BlogsType) {
           <div className="flex gap-2">
             Tags:
             {post.tags.map((tag, index) => (
-              <span className="border border-e-yellow-100" key={index}>
-                {tag}
+              <span className="border border-amber-900 rounded-3xl px-2 py-1" key={index}>
+                #{tag}
               </span>
             ))}
           </div>
@@ -29,7 +29,7 @@ export default function BlogCard( {data} : BlogsType) {
             </div>
             <Link href={`/blogs/${post.id}`} className="self-end mt-4">
               {" "}
-              <Button>Read More</Button>
+              <Button className={"hover:underline"}>Read More</Button>
             </Link>
           </div>
         </div>

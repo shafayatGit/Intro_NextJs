@@ -6,7 +6,6 @@ import {
   SidebarContent,
   SidebarGroup,
   SidebarGroupContent,
-  SidebarGroupLabel,
   SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
@@ -18,6 +17,7 @@ import { adminRoutes } from "@/src/routes/adminRoutes";
 import { userRoutes } from "@/src/routes/userRoutes";
 import { Routes } from "@/src/types";
 import { VersionSwitcher } from "./version-switcher";
+import { Roles } from "@/src/constants/roles";
 
 // This is sample data
 const data = {
@@ -30,8 +30,8 @@ export function AppSidebar({
   user: { role: string } & React.ComponentProps<typeof Sidebar>;
 }) {
   let routes: Routes[] = [];
-  if (user.role === "admin") routes = adminRoutes;
-  else if (user.role === "user") {
+  if (user.role === Roles.admin) routes = adminRoutes;
+  else if (user.role === Roles.user) {
     routes = userRoutes;
   } else {
     routes = [];
@@ -48,7 +48,6 @@ export function AppSidebar({
       <SidebarContent>
         {routes.map((item) => (
           <SidebarGroup key={item.title}>
-            <SidebarGroupLabel>{item.title}</SidebarGroupLabel>
             <SidebarGroupContent>
               <SidebarMenu>
                 {item.items.map((item) => (

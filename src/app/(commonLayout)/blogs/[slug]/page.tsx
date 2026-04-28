@@ -6,10 +6,9 @@ import { Eye, MessageCircle, User } from "lucide-react";
 // rest of the pages will shown 404 if we try to access them because we are going to generate only 3 static pages(SSG) and for the rest of the data we will use dynamic rendering(SSR). Sometimes needed.
 
 //*We have to retuen basically [ {slug: "asdfjhdjff"},{slug: "lkgkjdsfdlsjfdkf"} ] this type of array from generateStaticParams function because nextjs will use this array to generate static pages for each blog post based on the slug. So we have to fetch all the blog posts and then map through them and return the slug of each blog post in the required format.
-
 export async function generateStaticParams() {
   const { data } = await blogService.getBlogPosts();
-  return data.data.data.map((blog: BlogsType) => ({
+  return data?.data?.data.map((blog: BlogsType) => ({
     // that will return array of objects with id/slug
     slug: blog.id.toString().slice(0, 3), //that means we are going to make only 3 static data(SSG) and for the rest of the data we will use dynamic rendering(SSR).
   }));
