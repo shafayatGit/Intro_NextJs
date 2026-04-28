@@ -10,6 +10,10 @@ import { Button } from "../../ui/button";
 import { Field, FieldGroup, FieldLabel } from "../../ui/field";
 import { Input } from "../../ui/input";
 import { Textarea } from "@/src/components/ui/textarea";
+import { env } from "@/src/env";
+import { cookies } from "next/headers";
+
+const API_URL = env.APP_URL;
 
 const createBlog = async (formData: FormData) => {
   "use server";
@@ -21,7 +25,19 @@ const createBlog = async (formData: FormData) => {
     content,
     tags: tags.split(",").map((tag) => tag.trim()),
   };
-  console.log(JSON.stringify(blogData)); //backend will get a json data so we converted it to JSON
+  console.log(JSON.stringify(blogData))
+  const cookieStore = await cookies();
+
+  const res = await fetch(`${API_URL}/posts`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Cookie: cookieStore.toString(), // Forward cookies for authentication
+    },
+    body: JSON.stringify(blogData),
+  }); 
+
+  console.log(res);
 };
 
 export default function CreateBlogServer() {
