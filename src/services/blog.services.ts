@@ -1,4 +1,6 @@
+import { cookies } from "next/headers";
 import { env } from "../env";
+import { BlogsType } from "../types";
 
 const API_URL = env.APP_URL;
 
@@ -14,6 +16,11 @@ interface ServiceOptions {
 interface BlogBlogParams {
   search?: string;
   isFeatured?: boolean;
+}
+export interface BlogPostParams {
+  title: string;
+  content: string;
+  tags: string[];
 }
 
 export const blogService = {
@@ -64,6 +71,24 @@ export const blogService = {
     try {
       const res = await fetch(`${API_URL}/posts/${id}`, {
         cache: "no-store",
+      });
+      const data = await res.json();
+      return { data: data, error: null };
+    } catch (error) {
+      return { data: null, error: { message: "something went wrong" } };
+    }
+  },
+
+  createBlogPost: async function (blogData: BlogPostParams) {
+    try {
+      const cookieStore = await cookies();
+      const res = await fetch(`${API_URL}/posts`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Cookie: cookieStore.toString(), // Forward cookies for authentication..
+        },
+        body: JSON.stringify(blogData),
       });
       const data = await res.json();
       return { data: data, error: null };
