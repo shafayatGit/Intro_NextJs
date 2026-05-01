@@ -12,6 +12,7 @@ import { Input } from "../../ui/input";
 import { Textarea } from "@/src/components/ui/textarea";
 import { env } from "@/src/env";
 import { cookies } from "next/headers";
+import { revalidateTag, updateTag } from "next/cache";
 
 const API_URL = env.APP_URL;
 
@@ -25,7 +26,7 @@ const createBlog = async (formData: FormData) => {
     content,
     tags: tags.split(",").map((tag) => tag.trim()),
   };
-  console.log(JSON.stringify(blogData))
+  console.log(JSON.stringify(blogData));
   const cookieStore = await cookies();
 
   const res = await fetch(`${API_URL}/posts`, {
@@ -33,12 +34,14 @@ const createBlog = async (formData: FormData) => {
     headers: {
       "Content-Type": "application/json",
       Cookie: cookieStore.toString(), // Forward cookies for authentication..
-      
     },
     body: JSON.stringify(blogData),
-  }); 
+  });
 
-  console.log(res);
+  if (res.ok) {
+    // revalidateTag("blogPosts", "max"); // must have to use max and the name has to be the same.
+    updateTag("blogPosts") // can also use this
+  }
 };
 
 export default function CreateBlogServer() {

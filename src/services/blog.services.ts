@@ -43,7 +43,15 @@ export const blogService = {
         config.next = { revalidate: options.revalidate }; //We can set the revalidate option to a number in seconds to enable ISR (Incremental Static Regeneration) or we can set it to "force-cache" to force caching or "default" to use the default caching behavior of the browser
       }
 
+      config.next = { ...config.next, tags: ["blogPosts"] }; //We can add tags to the cache to invalidate the cache based on the tags. So when we create a new blog post we can invalidate the cache for the "blog-posts" tag and the next request will fetch the new data from the server.
       const res = await fetch(url.toString(), config);
+
+      //We can do this like this also
+      // const res = await fetch(url.toString(), {
+      //   next:{
+      //     tags: ["blogPosts"],
+      //   }
+      // });
       const data = await res.json();
 
       return { data: data, error: null };
