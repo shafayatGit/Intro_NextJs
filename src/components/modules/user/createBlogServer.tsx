@@ -32,7 +32,7 @@ const createBlog = async (formData: FormData) => {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Cookie: cookieStore.toString(), // Forward cookies for authentication.
+      Cookie: cookieStore.toString(), // Forward cookies for authentication..
       
     },
     body: JSON.stringify(blogData),
