@@ -4,10 +4,10 @@ import { Button } from "@base-ui/react";
 import Link from "next/link";
 import React from "react";
 
-export default function BlogCard( {data} : BlogsType) {
+export default function BlogCard( {blogs} : {data: BlogsType}) {
   return (
     <div className="max-w-7xl mx-auto grid grid-cols-3 gap-4 items-center justify-center">
-      {data?.data?.data?.map((post: BlogsType) => (
+      {blogs?.data?.data?.map((post: BlogsType) => (
         <div
           className="p-3 border-2 border-amber-950 rounded-2xl flex flex-col gap-3 bg-gray-900/50"
           key={post.id}

@@ -16,6 +16,8 @@ interface ServiceOptions {
 interface BlogBlogParams {
   search?: string;
   isFeatured?: boolean;
+  page?: string;
+  limit?: string;
 }
 export interface BlogPostParams {
   title: string;
