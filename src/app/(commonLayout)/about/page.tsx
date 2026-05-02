@@ -7,7 +7,7 @@ export default async function AboutPage() {
   console.log(data);
   useEffect(() => {
     (async () => {
-      //IIFI function to handle async operation inside useEffect.
+      //IIFI function to handle async operation inside useEffect..
       const { data } = await getBlogs();
       setData(data);
     })();
