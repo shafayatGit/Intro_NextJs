@@ -16,7 +16,7 @@ export default async function Home() {
   // console.log(data.data.data)
   return (
     <div>
-      <BlogCard data={data} />
+      <BlogCard data={data?.data?.data} />
     </div>
   );
 }

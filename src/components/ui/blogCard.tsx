@@ -4,10 +4,10 @@ import { Button } from "@base-ui/react";
 import Link from "next/link";
 import React from "react";
 
-export default function BlogCard( {blogs} : {data: BlogsType}) {
+export default function BlogCard({ data }: { data: BlogsType[] }) {
   return (
     <div className="max-w-7xl mx-auto grid grid-cols-3 gap-4 items-center justify-center">
-      {blogs?.data?.data?.map((post: BlogsType) => (
+      {data.map((post: BlogsType) => (
         <div
           className="p-3 border-2 border-amber-950 rounded-2xl flex flex-col gap-3 bg-gray-900/50"
           key={post.id}
@@ -17,7 +17,10 @@ export default function BlogCard( {blogs} : {data: BlogsType}) {
           <div className="flex gap-2">
             Tags:
             {post.tags.map((tag, index) => (
-              <span className="border border-amber-900 rounded-3xl px-2 py-1" key={index}>
+              <span
+                className="border border-amber-900 rounded-3xl px-2 py-1"
+                key={index}
+              >
                 #{tag}
               </span>
             ))}

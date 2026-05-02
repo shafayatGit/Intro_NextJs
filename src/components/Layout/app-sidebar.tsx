@@ -38,13 +38,19 @@ export function AppSidebar({
   }
   return (
     <Sidebar {...props}>
-      <SidebarHeader>
-        <VersionSwitcher
-          versions={data.versions}
-          defaultVersion={data.versions[0]}
+      <Link
+        href="/"
+        className="flex items-center gap-2"
+      >
+        <img
+          src="https://deifkwefumgah.cloudfront.net/shadcnblocks/block/logos/shadcnblockscom-icon.svg"
+          alt="Shadcn UI Navbar"
         />
-        <SearchForm />
-      </SidebarHeader>
+        <span className="text-lg font-semibold tracking-tighter">
+          Next Blog
+        </span>
+      </Link>
+
       <SidebarContent>
         {routes.map((item) => (
           <SidebarGroup key={item.title}>

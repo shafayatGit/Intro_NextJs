@@ -74,6 +74,7 @@ export default function PaginationControls({
               onClick={() => {
                 navigateToPage(currentPage + 1);
               }}
+            
             />
           </PaginationItem>
         </PaginationContent>
